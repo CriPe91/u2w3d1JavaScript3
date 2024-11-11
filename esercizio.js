@@ -40,8 +40,26 @@ console.log(Pet2.isSameOwner(Pet4));
 console.log(Pet1.isSameOwner(Pet3));
 
 const pets = [];
-function petList() {
+function petLista() {
   const petList = document.getElementById("petList");
   petList.innerHTML = "";
-  pets.forEach((pet, index));
+  pets.forEach((pet) => {
+    const petLi = document.createElement("li");
+    petLi.innerText = `Nome: ${pet.petName}, Proprietario: ${pet.ownerName}, Specie:${pet.species}, Razza: ${pet.breed}`;
+    petList.appendChild(petLi);
+  });
 }
+
+const form = document.getElementById("petForm");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const nomeAnimale = document.getElementById("petName").value;
+  const Proprietario = document.getElementById("ownerName").value;
+  const specie = document.getElementById("species").value;
+  const breed = document.getElementById("breed").value;
+  const newPet = new Pet(nomeAnimale, Proprietario, specie, breed);
+  pets.push(newPet);
+  petLista();
+  console.log(pets);
+  form.reset();
+});
